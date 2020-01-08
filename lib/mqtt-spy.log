@@ -1,0 +1,57 @@
+2020-01-07 14:08:16,807 INFO  [JavaFX Application Thread     ] [BaseConfigurationManager      ]  - Creating UI property file
+2020-01-07 14:08:17,184 ERROR [JavaFX Application Thread     ] [BaseConfigurationUtils        ]  - Invalid number format 
+2020-01-07 14:08:17,581 ERROR [JavaFX Application Thread     ] [MqttStatsFileIO               ]  - Cannot read the statistics file from C:\Users\Administrator\mqtt-spy\mqtt-spy-stats.xml
+java.io.FileNotFoundException: Cannot load the file from C:\Users\Administrator\mqtt-spy\mqtt-spy-stats.xml
+	at pl.baczkowicz.spy.xml.XMLParser.loadFromFile(XMLParser.java:359)
+	at pl.baczkowicz.mqttspy.ui.stats.MqttStatsFileIO.loadStats(MqttStatsFileIO.java:57)
+	at pl.baczkowicz.spy.ui.stats.StatisticsManager.loadStats(StatisticsManager.java:298)
+	at pl.baczkowicz.mqttspy.ui.controllers.MqttSpyMainController.init(MqttSpyMainController.java:154)
+	at pl.baczkowicz.mqttspy.ui.MqttViewManager.createMainWindow(MqttViewManager.java:151)
+	at pl.baczkowicz.mqttspy.Main.start(Main.java:90)
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$8(LauncherImpl.java:863)
+	at com.sun.javafx.application.PlatformImpl.lambda$runAndWait$7(PlatformImpl.java:326)
+	at com.sun.javafx.application.PlatformImpl.lambda$null$5(PlatformImpl.java:295)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$6(PlatformImpl.java:294)
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at com.sun.glass.ui.win.WinApplication.lambda$null$4(WinApplication.java:186)
+	at java.lang.Thread.run(Unknown Source)
+2020-01-07 14:08:18,194 INFO  [JavaFX Application Thread     ] [MqttViewManager               ]  - Default configuration file present (C:\Users\Administrator\mqtt-spy\mqtt-spy-configuration.xml) = false
+2020-01-07 14:08:24,383 ERROR [JavaFX Application Thread     ] [ControlPanelController        ]  - Cannot retrieve version info
+pl.baczkowicz.spy.exceptions.XMLException: Cannot unmarshal the XML
+	at pl.baczkowicz.spy.xml.XMLParser.loadFromString(XMLParser.java:285)
+	at pl.baczkowicz.spy.ui.versions.VersionManager.loadVersions(VersionManager.java:98)
+	at pl.baczkowicz.spy.ui.controllers.ControlPanelController$2.run(ControlPanelController.java:203)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: javax.xml.bind.UnmarshalException
+ - with linked exception:
+[org.xml.sax.SAXParseException; lineNumber: 1; columnNumber: 1; 文件提前结束。]
+	at javax.xml.bind.helpers.AbstractUnmarshallerImpl.createUnmarshalException(Unknown Source)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallerImpl.createUnmarshalException(Unknown Source)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallerImpl.unmarshal0(Unknown Source)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallerImpl.unmarshal(Unknown Source)
+	at javax.xml.bind.helpers.AbstractUnmarshallerImpl.unmarshal(Unknown Source)
+	at javax.xml.bind.helpers.AbstractUnmarshallerImpl.unmarshal(Unknown Source)
+	at pl.baczkowicz.spy.xml.XMLParser.loadFromString(XMLParser.java:277)
+	... 3 more
+Caused by: org.xml.sax.SAXParseException; lineNumber: 1; columnNumber: 1; 文件提前结束。
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.createSAXParseException(Unknown Source)
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.fatalError(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLScanner.reportFatalError(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl$PrologDriver.next(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.next(Unknown Source)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(Unknown Source)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(Unknown Source)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(Unknown Source)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(Unknown Source)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(Unknown Source)
+	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(Unknown Source)
+	... 8 more
+2020-01-07 14:08:37,771 INFO  [JavaFX Application Thread     ] [EditConnectionsController     ]  - Selecting first item...
+2020-01-07 14:08:37,772 INFO  [JavaFX Application Thread     ] [EditConnectionsController     ]  - Selecting first item...
+2020-01-07 14:08:37,772 INFO  [JavaFX Application Thread     ] [EditConnectionsController     ]  - Selecting first item...
+2020-01-07 14:09:02,792 INFO  [JavaFX Application Thread     ] [EditConnectionsController     ]  - Selecting first item...

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="mqtt-spy-0.5.4-jar-with-dependencies">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/mqtt-spy-0.5.4-jar-with-dependencies.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
