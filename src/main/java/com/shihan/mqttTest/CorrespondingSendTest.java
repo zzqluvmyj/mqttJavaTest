@@ -29,7 +29,7 @@ public class CorrespondingSendTest extends ClientTest {
         }
         startTime = System.currentTimeMillis();//发送消息时计时
         for (int i = 0; i < threadSize; i++) {
-                threads[i].getPeer().publish();//每个线程只有一个消息，发布一次就行
+                threads[i].getPeer().publish(i);//每个线程只有一个消息，发布一次就行
         }
         while (publishedNoMap.containsValue(false)) {
             for (int j = 0; j < threadSize; j++)
@@ -39,13 +39,15 @@ public class CorrespondingSendTest extends ClientTest {
                     }
                 }
         }
+        for (int i = 0; i < threadSize; i++) {
+            threads[i].getPeer().disConnect();
+        }
         System.out.println("已全部发布");
         System.out.println("startTime:"+startTime);
-
     }
     public static void main(String[] args) {
-        String broker ="tcp://127.0.0.1:1883";
-        int threadSize = 500;
+        String broker ="tcp://10.0.3.250:1883";
+        int threadSize = 10000;
         CorrespondingSendTest correspondingSendTest = new CorrespondingSendTest(broker, threadSize);
         correspondingSendTest.init();
         correspondingSendTest.startTest();

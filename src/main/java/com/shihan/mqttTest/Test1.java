@@ -71,7 +71,7 @@ public class Test1 {
         //发布
         for (int i = 0; i < size; i++) {
             sender.generateMessage(i);
-            sender.publish();
+            sender.publish(i);
         }
         //判断是否所有线程都接收完毕
         while (arrivedNoMap.containsValue(false)) {

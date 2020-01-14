@@ -2,6 +2,7 @@ package com.shihan.domain;
 
 import org.eclipse.paho.client.mqttv3.*;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,6 +13,14 @@ public class PushCallBack implements MqttCallback {
     private int nowArriveMessageNum = 1;
     private int nowPublishMessageNum=1;
     private Map<String, Boolean> result = new HashMap<String, Boolean>();//因为要多次覆盖，用map更合适
+    String message;
+    int messsageNo;
+    long temp;
+    public long[] getMessagesEndTime() {
+        return messagesEndTime;
+    }
+
+    private long[] messagesEndTime;
 
     public PushCallBack(String peerName, int expectedArriveMessageNum,int expectedPublishMessageNum) {
         this.peerName = peerName;
@@ -19,6 +28,7 @@ public class PushCallBack implements MqttCallback {
         this.expectedPublishMessageNum=expectedPublishMessageNum;
         result.put("send", false);
         result.put("receive", false);
+        messagesEndTime=new long[expectedPublishMessageNum];
     }
 
     //消息是否发出成功
@@ -55,11 +65,19 @@ public class PushCallBack implements MqttCallback {
     //传输完成,也就是publish
 
     public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
+        try{
+            temp=System.currentTimeMillis();
+            messsageNo=iMqttDeliveryToken.getMessageId()-1;
+            messagesEndTime[messsageNo]=temp;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         if(nowPublishMessageNum<expectedPublishMessageNum){
             this.nowPublishMessageNum++;
         }else{
             this.result.put("send", true);//暂时无客户端发多个消息的要求，所以此处只要发出去一个，就通过
             //System.out.println("send success "+peerName);
+            //System.out.println("h: "+Arrays.toString(messagesEndTime));
         }
         //IO操作耗时，不做了
         //System.out.println(peerName + "传输完成");

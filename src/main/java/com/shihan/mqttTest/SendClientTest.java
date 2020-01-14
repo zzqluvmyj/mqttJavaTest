@@ -31,7 +31,7 @@ public class SendClientTest extends ClientTest {
         for (int i = 0; i < threadSize; i++) {
             for (int j = 0; j < topicSize; j++) {
                 threads[i].getPeer().generateMessage(j);
-                threads[i].getPeer().publish();
+                threads[i].getPeer().publish(j);
             }
         }
         while (publishedNoMap.containsValue(false)) {

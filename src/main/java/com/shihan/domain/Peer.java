@@ -69,21 +69,24 @@ public class Peer {
         }
     }
 
-    public void generateMessage(int topicNo){
+    public void generateMessage(int messageNo){
         message=new MqttMessage();
         message.setQos(this.Qos);
         message.setRetained(false);
-        this.topicId="topic"+topicNo;
-        topic=client.getTopic(topicId);
-        message.setPayload((this.clientId+"->"+topicId).getBytes());
+        message.setPayload((""+messageNo).getBytes());
+        message.setId(messageNo);
     }
 
-    public void publish() {//发布消息
+    public void publish(int topicNo) {//发布消息
+        this.topicId="topic"+topicNo;
+        topic=client.getTopic(topicId);
         MqttDeliveryToken token=new MqttDeliveryToken();
         try{
             token= topic.publish(message);//消息发布前返回token，发布后返回null
             token.waitForCompletion();//阻止当前线程，直到发布完成
             //System.out.println(this.clientId+"->"+topicId);
+            //System.out.println( token.getMessage().getPayload());
+
         }catch (MqttException e){
             e.printStackTrace();
         }
