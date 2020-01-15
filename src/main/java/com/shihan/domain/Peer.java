@@ -76,6 +76,13 @@ public class Peer {
         message.setPayload((""+messageNo).getBytes());
         message.setId(messageNo);
     }
+    public void generateMessage(){
+        message=new MqttMessage();
+        message.setQos(this.Qos);
+        message.setRetained(false);
+        message.setPayload(("nothing").getBytes());
+    }
+
 
     public void publish(int topicNo) {//发布消息
         this.topicId="topic"+topicNo;

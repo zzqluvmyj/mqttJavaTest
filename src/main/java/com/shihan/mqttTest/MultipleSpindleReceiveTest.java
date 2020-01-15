@@ -63,8 +63,8 @@ public class MultipleSpindleReceiveTest extends ClientTest {
 
     public static void main(String[] args) {
         String broker = "tcp://127.0.0.1:1883";
-        int threadSize = 100;
-        int topics=10;
+        int threadSize = 5;
+        int topics=5;
         MultipleSpindleReceiveTest m=new MultipleSpindleReceiveTest(broker,threadSize,topics);
         m.init();
         m.startTest();
