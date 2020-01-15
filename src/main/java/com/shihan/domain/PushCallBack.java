@@ -16,12 +16,14 @@ public class PushCallBack implements MqttCallback {
     String message;
     int messsageNo;
     long temp;
+    private long[] messagesEndTime;
+    private long[] arrivedMessageEndTime;
+    public long[] getArrivedMessageEndTime() {
+        return arrivedMessageEndTime;
+    }
     public long[] getMessagesEndTime() {
         return messagesEndTime;
     }
-
-    private long[] messagesEndTime;
-
     public PushCallBack(String peerName, int expectedArriveMessageNum,int expectedPublishMessageNum) {
         this.peerName = peerName;
         this.expectedArriveMessageNum = expectedArriveMessageNum;
@@ -29,6 +31,7 @@ public class PushCallBack implements MqttCallback {
         result.put("send", false);
         result.put("receive", false);
         messagesEndTime=new long[expectedPublishMessageNum];
+        arrivedMessageEndTime=new long[expectedArriveMessageNum];
     }
 
     //消息是否发出成功
@@ -50,6 +53,15 @@ public class PushCallBack implements MqttCallback {
     //订阅后，消息接收到这里
 
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
+        //arrivedMessageEndTime
+        try{
+            temp=System.currentTimeMillis();
+            messsageNo=Integer.parseInt(new String(mqttMessage.getPayload()));
+            System.out.println(messsageNo);
+            arrivedMessageEndTime[messsageNo]=temp;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         if(this.nowArriveMessageNum < this.expectedArriveMessageNum) {
             this.nowArriveMessageNum++;
             //System.out.println(s);

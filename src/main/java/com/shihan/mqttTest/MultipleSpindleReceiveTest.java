@@ -2,6 +2,9 @@ package com.shihan.mqttTest;
 
 import com.shihan.domain.PeerThread;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +14,7 @@ public class MultipleSpindleReceiveTest extends ClientTest {
     private int[] Qoss;//1,1,1,1....
     private int expectArriveMessageNum;
     private int topics;//每个线程要接收的主题数，不同线程接收完全不相同的主题
+    public long[][] messagesEndTime;//消息发送结束时间
 
     public MultipleSpindleReceiveTest(String broker, int threadSize,int topics) {
         super(broker, threadSize, 1);
@@ -18,6 +22,7 @@ public class MultipleSpindleReceiveTest extends ClientTest {
         this.topics=topics;//
         topicNOs=new int[threadSize][topics];
         Qoss=new int[topics];
+        messagesEndTime=new long[threadSize][topics];
     }
 
     @Override
@@ -51,6 +56,7 @@ public class MultipleSpindleReceiveTest extends ClientTest {
                 if (!arrivedNoMap.get(j)) {
                     if (threads[j].getPeer().callBack.isArriveSuccessful()) {
                         arrivedNoMap.put(j, true);
+                        messagesEndTime[j]=threads[j].getPeer().callBack.getArrivedMessageEndTime();
                     }
                 }
         }
@@ -58,10 +64,30 @@ public class MultipleSpindleReceiveTest extends ClientTest {
         for (int i = 0; i < threadSize; i++) {
             threads[i].getPeer().disConnect();
         }
-        System.out.println("endTime:" + endTime);
+        File f;
+        FileWriter w;
+        BufferedWriter out;
+            f = new File("receiveEndTimes.txt");
+        try {
+            f.createNewFile();
+            w = new FileWriter(f);
+            out = new BufferedWriter(w);
+            for (int i = 0; i < threadSize; i++) {
+                for (int j = 0; j < topics; j++) {
+                    out.write(messagesEndTime[i][j] + " ");
+                }
+            }
+            out.flush();
+            out.close();
+            w.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(endTime);
     }
 
     public static void main(String[] args) {
+        //String broker = "tcp://10.0.3.250:1883";
         String broker = "tcp://127.0.0.1:1883";
         int threadSize = 5;
         int topics=5;

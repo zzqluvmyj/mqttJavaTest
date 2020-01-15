@@ -40,8 +40,8 @@ public class MultipleSpindleSendTest extends ClientTest {
         int num = 0;
         startTime = System.currentTimeMillis();//发送消息时计时
         for (int i = 0; i < threadSize; i++) {
-            threads[i].getPeer().generateMessage();//一个线程只有一个消息
             for (int j = 0; j < topics; j++) {
+                threads[i].getPeer().generateMessage(j);//生成对应的消息
                 messagesStartTime[i][j] = System.currentTimeMillis();
                 threads[i].getPeer().publish(num++);//每个线程只有一个消息，发布一次就行
             }
@@ -73,9 +73,9 @@ public class MultipleSpindleSendTest extends ClientTest {
         FileWriter w;
         BufferedWriter out;
         if (isStartTime) {
-            f = new File("startTimes.txt");
+            f = new File("publishStartTimes.txt");
         }else{
-            f = new File("endTimes.txt");
+            f = new File("publishEndTimes.txt");
         }
         try {
             f.createNewFile();
@@ -98,6 +98,7 @@ public class MultipleSpindleSendTest extends ClientTest {
     }
 
     public static void main(String[] args) {
+        //String broker = "tcp://10.0.3.250:1883";
         String broker = "tcp://127.0.0.1:1883";
         int threadSize = 5;
         int topics = 5;
