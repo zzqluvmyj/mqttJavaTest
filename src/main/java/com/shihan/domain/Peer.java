@@ -84,8 +84,8 @@ public class Peer {
     }
 
 
-    public void publish(int topicNo) {//发布消息
-        this.topicId="topic"+topicNo;
+    public void publish(String name,int topicNo) {//发布消息
+        this.topicId=name+topicNo;
         topic=client.getTopic(topicId);
         MqttDeliveryToken token=new MqttDeliveryToken();
         try{
@@ -99,7 +99,7 @@ public class Peer {
         }
     }
 
-    public void subscribe(int[] topicNos,int[] QoSs) {//订阅
+    public void subscribe(String name,int[] topicNos,int[] QoSs) {//订阅
         if(topicNos.length!=QoSs.length){
             System.out.println("订阅的topicNo和qOS数量不一致");
             return ;
@@ -107,7 +107,7 @@ public class Peer {
         int n=topicNos.length;
         String []topicIDs=new String[n];
         for(int i=0;i<n;i++){
-            topicIDs[i]="topic"+topicNos[i];
+            topicIDs[i]=name+topicNos[i];
         }
         try{
             client.subscribe(topicIDs,QoSs);

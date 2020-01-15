@@ -26,5 +26,12 @@
             <artifactId>rocketmq-client</artifactId>
             <version>4.6.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/io.openmessaging/openmessaging-api -->
+        <dependency>
+            <groupId>io.openmessaging</groupId>
+            <artifactId>openmessaging-api</artifactId>
+            <version>1.0.0-alpha</version>
+        </dependency>
+
     </dependencies>
 </project>

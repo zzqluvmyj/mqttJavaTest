@@ -43,7 +43,7 @@ public class MultipleSpindleSendTest extends ClientTest {
             for (int j = 0; j < topics; j++) {
                 threads[i].getPeer().generateMessage(j);//生成对应的消息
                 messagesStartTime[i][j] = System.currentTimeMillis();
-                threads[i].getPeer().publish(num++);//每个线程只有一个消息，发布一次就行
+                threads[i].getPeer().publish("topic",num++);//每个线程只有一个消息，发布一次就行
             }
         }
         while (publishedNoMap.containsValue(false)) {
@@ -98,10 +98,10 @@ public class MultipleSpindleSendTest extends ClientTest {
     }
 
     public static void main(String[] args) {
-        //String broker = "tcp://10.0.3.250:1883";
-        String broker = "tcp://127.0.0.1:1883";
-        int threadSize = 5;
-        int topics = 5;
+        String broker = "tcp://10.0.3.250:1883";
+        //String broker = "tcp://127.0.0.1:1883";
+        int threadSize = 100;
+        int topics = 5000;
         MultipleSpindleSendTest m = new MultipleSpindleSendTest(broker, threadSize, topics);
         m.init();
         m.startTest();

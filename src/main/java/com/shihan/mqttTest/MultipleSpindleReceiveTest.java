@@ -48,7 +48,7 @@ public class MultipleSpindleReceiveTest extends ClientTest {
     public void startTest() {
         super.startTest();
         for (int i = 0; i < threadSize; i++) {
-            threads[i].getPeer().subscribe(topicNOs[i], Qoss);
+            threads[i].getPeer().subscribe("atopic",topicNOs[i], Qoss);
         }
         System.out.println("已全部订阅");
         while (arrivedNoMap.containsValue(false)) {
@@ -87,10 +87,10 @@ public class MultipleSpindleReceiveTest extends ClientTest {
     }
 
     public static void main(String[] args) {
-        //String broker = "tcp://10.0.3.250:1883";
-        String broker = "tcp://127.0.0.1:1883";
-        int threadSize = 5;
-        int topics=5;
+        String broker = "tcp://10.0.3.250:1883";
+        //String broker = "tcp://127.0.0.1:1883";
+        int threadSize = 100;
+        int topics=100;
         MultipleSpindleReceiveTest m=new MultipleSpindleReceiveTest(broker,threadSize,topics);
         m.init();
         m.startTest();

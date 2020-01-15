@@ -54,10 +54,11 @@ public class PushCallBack implements MqttCallback {
 
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
         //arrivedMessageEndTime
+        System.out.println("zhu:"+System.currentTimeMillis());
         try{
             temp=System.currentTimeMillis();
             messsageNo=Integer.parseInt(new String(mqttMessage.getPayload()));
-            System.out.println(messsageNo);
+            //System.out.println(messsageNo);
             arrivedMessageEndTime[messsageNo]=temp;
         }catch (Exception e){
             e.printStackTrace();
